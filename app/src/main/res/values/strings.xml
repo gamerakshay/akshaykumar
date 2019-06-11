@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Esp_App</string>
+    <string name="wifi_on_off">WiFi ON/OFF</string>
+    <string name="led_1">LED 1</string>
+    <string name="led_2">LED 2</string>
+    <string name="led_3">LED 3</string>
+    <string name="textview">TextView</string>
+
+</resources>
