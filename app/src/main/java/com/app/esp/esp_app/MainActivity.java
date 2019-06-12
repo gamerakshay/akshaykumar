@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     Boolean l1, l2, l3, turn;
     RelativeLayout layout_joystick;
+    RelativeLayout layout_joystick1;
     JoyStickClass js;
+    JoyStickClass js1;
     static WifiManager wifiManager;
     Context context;
     WifiConfiguration conf;
@@ -35,12 +37,16 @@ public class MainActivity extends AppCompatActivity {
     TextView textView1;
     TextView textView2;
     TextView textView3;
+    TextView textView4;
+    TextView textView5;
+    TextView textView6;
     int min = 0;
     int max = 2000;
     int step = 5;
     public static String networkSSID = "esp_abc";
     public static String networkPass = "esp123";
-    byte[] buf = new byte[1024];//used to sending information to esp is a form of byte
+    byte[] buf = new byte[1024];
+    byte[] buf1 = new byte[1024];//used to sending information to esp is a form of byte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
         textView2 = (TextView) findViewById(R.id.textView2);
         textView3 = (TextView) findViewById(R.id.textView3);
         layout_joystick = (RelativeLayout) findViewById(R.id.layout_joystick);
+        layout_joystick1 = (RelativeLayout) findViewById(R.id.layout_joystick1);
+        textView4 = (TextView) findViewById(R.id.textView4);
+        textView5 = (TextView) findViewById(R.id.textView5);
+        textView6 = (TextView) findViewById(R.id.textView6);
+
         l1 = l2 = l3 = turn = true;
         context = this;
 
@@ -64,6 +75,67 @@ public class MainActivity extends AppCompatActivity {
         js.setStickAlpha(100);
         js.setOffset(90);
         js.setMinimumDistance(50);
+
+
+
+
+        //second joystick
+        js1 = new JoyStickClass(getApplicationContext()
+                , layout_joystick1, R.drawable.image_button_2);
+        js1.setStickSize(150, 150);
+        js1.setLayoutSize(500, 500);
+        js1.setLayoutAlpha(150);
+        js1.setStickAlpha(100);
+        js1.setOffset(90);
+        js1.setMinimumDistance(50);
+
+
+        layout_joystick1.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                js1.drawStick(arg1);
+                if (arg1.getAction() == MotionEvent.ACTION_DOWN
+                        || arg1.getAction() == MotionEvent.ACTION_MOVE) {
+                    int direction = js1.get8Direction();
+
+                    if (direction == JoyStickClass.STICK_UP) {
+                        forward();
+                    } else if (direction == JoyStickClass.STICK_UPRIGHT) {
+
+                        forwardright();
+                    } else if (direction == JoyStickClass.STICK_RIGHT) {
+
+                        right();
+                    } else if (direction == JoyStickClass.STICK_DOWNRIGHT) {
+
+                        backwardright();
+                    } else if (direction == JoyStickClass.STICK_DOWN) {
+
+                        backward();
+                    } else if (direction == JoyStickClass.STICK_DOWNLEFT) {
+
+                        backwardleft();
+                    } else if (direction == JoyStickClass.STICK_LEFT) {
+
+                        left();
+                    } else if (direction == JoyStickClass.STICK_UPLEFT) {
+
+                        forwardleft();
+                    } else if (direction == JoyStickClass.STICK_NONE) {
+
+                        release();
+                    } else {
+                        release();
+                    }
+                } else if (arg1.getAction() == MotionEvent.ACTION_UP) {
+
+                }
+                return true;
+
+
+
+            }
+        });
+
         layout_joystick.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 js.drawStick(arg1);
@@ -104,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 return true;
+
+
+
             }
         });
     }
@@ -154,29 +229,51 @@ public class MainActivity extends AppCompatActivity {
     void forward() {
         String x = Integer.toString(js.getX());
         String y = Integer.toString(js.getY());
+        String X = Integer.toString(js1.getX());
+        String Y = Integer.toString(js1.getY());
+
+        textView6.setText(X);
+        textView4.setText(Y);
         textView3.setText(x);
         textView1.setText(y);
-
         Client a = new Client();
+        Client b = new Client();
         buf = null;
+        buf1 = null;
+        buf1 = (X + "A" + Y).getBytes();
         buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
+        textView5.setText(Arrays.toString(buf1));
         a.run();
-
+        b.run();
 
     }
+
+
+    //second joystick
+
+
 
     void forwardright() {
         String x = Integer.toString(js.getX());
         String y = Integer.toString(js.getY());
+        String X = Integer.toString(js1.getX());
+        String Y = Integer.toString(js1.getY());
+
+        textView6.setText(X);
+        textView4.setText(Y);
         textView3.setText(x);
         textView1.setText(y);
-
         Client a = new Client();
+        Client b = new Client();
         buf = null;
+        buf1 = null;
+        buf1 = (X + "A" + Y).getBytes();
         buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
+        textView5.setText(Arrays.toString(buf1));
         a.run();
+        b.run();
 
 
     }
@@ -184,28 +281,46 @@ public class MainActivity extends AppCompatActivity {
     void right() {
         String x = Integer.toString(js.getX());
         String y = Integer.toString(js.getY());
+        String X = Integer.toString(js1.getX());
+        String Y = Integer.toString(js1.getY());
+
+        textView6.setText(X);
+        textView4.setText(Y);
         textView3.setText(x);
         textView1.setText(y);
-
         Client a = new Client();
+        Client b = new Client();
         buf = null;
+        buf1 = null;
+        buf1 = (X + "A" + Y).getBytes();
         buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
+        textView5.setText(Arrays.toString(buf1));
         a.run();
+        b.run();
 
     }
 
     void backwardright() {
         String x = Integer.toString(js.getX());
         String y = Integer.toString(js.getY());
+        String X = Integer.toString(js1.getX());
+        String Y = Integer.toString(js1.getY());
+
+        textView6.setText(X);
+        textView4.setText(Y);
         textView3.setText(x);
         textView1.setText(y);
-
         Client a = new Client();
+        Client b = new Client();
         buf = null;
+        buf1 = null;
+        buf1 = (X + "A" + Y).getBytes();
         buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
+        textView5.setText(Arrays.toString(buf1));
         a.run();
+        b.run();
 
 
     }
@@ -213,28 +328,45 @@ public class MainActivity extends AppCompatActivity {
     void backward() {
         String x = Integer.toString(js.getX());
         String y = Integer.toString(js.getY());
+        String X = Integer.toString(js1.getX());
+        String Y = Integer.toString(js1.getY());
+
+        textView6.setText(X);
+        textView4.setText(Y);
         textView3.setText(x);
         textView1.setText(y);
-
         Client a = new Client();
+        Client b = new Client();
         buf = null;
+        buf1 = null;
+        buf1 = (X + "A" + Y).getBytes();
         buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
+        textView5.setText(Arrays.toString(buf1));
         a.run();
-
+        b.run();
     }
 
     void left() {
         String x = Integer.toString(js.getX());
         String y = Integer.toString(js.getY());
+        String X = Integer.toString(js1.getX());
+        String Y = Integer.toString(js1.getY());
+
+        textView6.setText(X);
+        textView4.setText(Y);
         textView3.setText(x);
         textView1.setText(y);
-
         Client a = new Client();
+        Client b = new Client();
         buf = null;
+        buf1 = null;
+        buf1 = (X + "A" + Y).getBytes();
         buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
+        textView5.setText(Arrays.toString(buf1));
         a.run();
+        b.run();
 
 
     }
@@ -242,14 +374,23 @@ public class MainActivity extends AppCompatActivity {
     void forwardleft() {
         String x = Integer.toString(js.getX());
         String y = Integer.toString(js.getY());
+        String X = Integer.toString(js1.getX());
+        String Y = Integer.toString(js1.getY());
+
+        textView6.setText(X);
+        textView4.setText(Y);
         textView3.setText(x);
         textView1.setText(y);
-
         Client a = new Client();
+        Client b = new Client();
         buf = null;
+        buf1 = null;
+        buf = (X + "A" + Y).getBytes();
         buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
+        textView5.setText(Arrays.toString(buf));
         a.run();
+        b.run();
 
 
     }
@@ -257,27 +398,45 @@ public class MainActivity extends AppCompatActivity {
     void release() {
         String x = Integer.toString(js.getX());
         String y = Integer.toString(js.getY());
+        String X = Integer.toString(js1.getX());
+        String Y = Integer.toString(js1.getY());
+
+        textView6.setText(X);
+        textView4.setText(Y);
         textView3.setText(x);
         textView1.setText(y);
-
         Client a = new Client();
+        Client b = new Client();
         buf = null;
+        buf1 = null;
+        buf1 = (X + "A" + Y).getBytes();
         buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
+        textView5.setText(Arrays.toString(buf1));
         a.run();
+        b.run();
     }
 
     void backwardleft() {
         String x = Integer.toString(js.getX());
         String y = Integer.toString(js.getY());
+        String X = Integer.toString(js1.getX());
+        String Y = Integer.toString(js1.getY());
+
+        textView6.setText(X);
+        textView4.setText(Y);
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
+        Client b = new Client();
         buf = null;
+        buf1 = null;
+        buf1 = (X + "A" + Y).getBytes();
         buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
+        textView5.setText(Arrays.toString(buf1));
         a.run();
-
+        b.run();
     }
 
     // when LED 1 BUTTON is pressed
