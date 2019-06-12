@@ -16,11 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -43,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
     public static String networkSSID = "esp_abc";
     public static String networkPass = "esp123";
     byte[] buf = new byte[1024];//used to sending information to esp is a form of byte
-    byte[] buf1 = new byte[1024];
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,8 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
         Client a = new Client();
         buf = null;
-        buf1 = null;
-        buf = (x +""+ y).getBytes();
+        buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
         a.run();
 
@@ -179,8 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
         Client a = new Client();
         buf = null;
-        buf1 = null;
-        buf = (x +""+ y).getBytes();
+        buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
         a.run();
 
@@ -195,8 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
         Client a = new Client();
         buf = null;
-        buf1 = null;
-        buf = (x +""+ y).getBytes();
+        buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
         a.run();
 
@@ -210,8 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
         Client a = new Client();
         buf = null;
-        buf1 = null;
-        buf = (x +""+ y).getBytes();
+        buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
         a.run();
 
@@ -226,8 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
         Client a = new Client();
         buf = null;
-        buf1 = null;
-        buf = (x +""+ y).getBytes();
+        buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
         a.run();
 
@@ -241,8 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
         Client a = new Client();
         buf = null;
-        buf1 = null;
-        buf = (x +""+ y).getBytes();
+        buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
         a.run();
 
@@ -257,8 +247,7 @@ public class MainActivity extends AppCompatActivity {
 
         Client a = new Client();
         buf = null;
-        buf1 = null;
-        buf = (x +""+ y).getBytes();
+        buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
         a.run();
 
@@ -273,8 +262,7 @@ public class MainActivity extends AppCompatActivity {
 
         Client a = new Client();
         buf = null;
-        buf1 = null;
-        buf = (x +""+ y).getBytes();
+        buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
         a.run();
     }
@@ -286,8 +274,7 @@ public class MainActivity extends AppCompatActivity {
         textView1.setText(y);
         Client a = new Client();
         buf = null;
-        buf1 = null;
-        buf = (x +""+ y).getBytes();
+        buf = (x +"A"+ y).getBytes();
         textView2.setText(Arrays.toString(buf));
         a.run();
 
@@ -354,7 +341,6 @@ public class MainActivity extends AppCompatActivity {
             a.run();
             Toast.makeText(MainActivity.this, "LED 3 ON", Toast.LENGTH_SHORT).show();
         } else {
-
             l3 = true;
             Client a = new Client();
             buf = null;
@@ -415,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 serverAddr = InetAddress.getByName(SERVER_ADDRESS);
                 socket = new DatagramSocket(); //DataGram socket is created
-                packet = new DatagramPacket(buf, buf.length, serverAddr, SERVER_PORT);//Data is loaded with information where to send on address and port number
+                packet = new DatagramPacket(buf,buf.length,serverAddr,SERVER_PORT);//Data is loaded with information where to send on address and port number
                 socket.send(packet);//Data is send in the form of packets
                 socket.close();//Needs to close the socket before other operation... its a good programming
             } catch (UnknownHostException e) {

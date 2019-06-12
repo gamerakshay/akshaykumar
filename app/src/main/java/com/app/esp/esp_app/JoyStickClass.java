@@ -32,8 +32,8 @@ public class JoyStickClass {
     private LayoutParams params;
     private int stick_width, stick_height;
 
-    private int position_x = 512, position_y = 512, min_distance = 512;
-    private float distance = 512, angle = 0;
+    private int position_x = 0, position_y = 0, min_distance = 0;
+    private float distance = 0, angle = 0;
 
     private DrawCanvas draw;
     private Paint paint;
