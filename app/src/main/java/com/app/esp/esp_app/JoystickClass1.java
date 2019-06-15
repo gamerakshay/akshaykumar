@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
 
-public class JoyStickClass {
+public class JoystickClass1 {
 
     public static final int STICK_NONE = 0;
     public static final int STICK_UP = 1;
@@ -41,7 +41,7 @@ public class JoyStickClass {
 
     private boolean touch_state = false;
 
-    public JoyStickClass(Context context, ViewGroup layout, int stick_res_id) {
+    public JoystickClass1(Context context, ViewGroup layout, int stick_res_id) {
 
         stick = BitmapFactory.decodeResource(context.getResources(),
                 stick_res_id);
@@ -55,17 +55,17 @@ public class JoyStickClass {
         params = mLayout.getLayoutParams();
     }
 
-    public void drawStick(MotionEvent arg1) {
-        position_x = (int) (arg1.getX() - (params.width/2));
-        position_y = (int) (arg1.getY() - (params.height/2));
+    public void drawStick(MotionEvent arg2) {
+        position_x = (int) (arg2.getX() - (params.width/2));
+        position_y = (int) (arg2.getY() - (params.height/2));
         //noinspection SuspiciousNameCombination: Android Studio is paranoid
         distance = (float) Math.sqrt(Math.pow(position_x, 2) + Math.pow(position_y, 2));
         angle = (float) cal_angle(position_x, position_y);
 
 
-        if(arg1.getAction() == MotionEvent.ACTION_DOWN) {
+        if(arg2.getAction() == MotionEvent.ACTION_DOWN) {
             if(distance <= (params.width / 2) - OFFSET) {
-                draw.position(arg1.getX(), arg1.getY());
+                draw.position(arg2.getX(), arg2.getY());
                 try {
                     draw();
                 } catch (Exception e) {
@@ -73,9 +73,9 @@ public class JoyStickClass {
                 }
                 touch_state = true;
             }
-        } else if(arg1.getAction() == MotionEvent.ACTION_MOVE && touch_state) {
+        } else if(arg2.getAction() == MotionEvent.ACTION_MOVE && touch_state) {
             if(distance <= (params.width / 2) - OFFSET) {
-                draw.position(arg1.getX(), arg1.getY());
+                draw.position(arg2.getX(), arg2.getY());
                 try {
                     draw();
                 } catch (Exception e) {
@@ -95,7 +95,7 @@ public class JoyStickClass {
             } else {
                 mLayout.removeView(draw);
             }
-        } else if(arg1.getAction() == MotionEvent.ACTION_UP) {
+        } else if(arg2.getAction() == MotionEvent.ACTION_UP) {
             mLayout.removeView(draw);
             touch_state = false;
         }

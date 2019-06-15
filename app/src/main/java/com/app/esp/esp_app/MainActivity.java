@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout layout_joystick;
     RelativeLayout layout_joystick1;
     JoyStickClass js;
-    JoyStickClass js1;
+    JoystickClass1 js1;
     static WifiManager wifiManager;
     Context context;
     WifiConfiguration conf;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public static String networkSSID = "esp_abc";
     public static String networkPass = "esp123";
     byte[] buf = new byte[1024];
-    byte[] buf1 = new byte[1024];//used to sending information to esp is a form of byte
+  //used to sending information to esp is a form of byte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         layout_joystick = (RelativeLayout) findViewById(R.id.layout_joystick);
         layout_joystick1 = (RelativeLayout) findViewById(R.id.layout_joystick1);
         textView4 = (TextView) findViewById(R.id.textView4);
-        textView5 = (TextView) findViewById(R.id.textView5);
+
         textView6 = (TextView) findViewById(R.id.textView6);
 
         l1 = l2 = l3 = turn = true;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //second joystick
-        js1 = new JoyStickClass(getApplicationContext()
+        js1 = new JoystickClass1(getApplicationContext()
                 , layout_joystick1, R.drawable.image_button_2);
         js1.setStickSize(150, 150);
         js1.setLayoutSize(500, 500);
@@ -97,30 +97,30 @@ public class MainActivity extends AppCompatActivity {
                         || arg1.getAction() == MotionEvent.ACTION_MOVE) {
                     int direction = js1.get8Direction();
 
-                    if (direction == JoyStickClass.STICK_UP) {
+                    if (direction == JoystickClass1.STICK_UP) {
                         forward();
-                    } else if (direction == JoyStickClass.STICK_UPRIGHT) {
+                    } else if (direction == JoystickClass1.STICK_UPRIGHT) {
 
                         forwardright();
-                    } else if (direction == JoyStickClass.STICK_RIGHT) {
+                    } else if (direction == JoystickClass1.STICK_RIGHT) {
 
                         right();
-                    } else if (direction == JoyStickClass.STICK_DOWNRIGHT) {
+                    } else if (direction == JoystickClass1.STICK_DOWNRIGHT) {
 
                         backwardright();
-                    } else if (direction == JoyStickClass.STICK_DOWN) {
+                    } else if (direction == JoystickClass1.STICK_DOWN) {
 
                         backward();
-                    } else if (direction == JoyStickClass.STICK_DOWNLEFT) {
+                    } else if (direction == JoystickClass1.STICK_DOWNLEFT) {
 
                         backwardleft();
-                    } else if (direction == JoyStickClass.STICK_LEFT) {
+                    } else if (direction == JoystickClass1.STICK_LEFT) {
 
                         left();
-                    } else if (direction == JoyStickClass.STICK_UPLEFT) {
+                    } else if (direction == JoystickClass1.STICK_UPLEFT) {
 
                         forwardleft();
-                    } else if (direction == JoyStickClass.STICK_NONE) {
+                    } else if (direction == JoystickClass1.STICK_NONE) {
 
                         release();
                     } else {
@@ -237,15 +237,10 @@ public class MainActivity extends AppCompatActivity {
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
-        Client b = new Client();
         buf = null;
-        buf1 = null;
-        buf1 = (X + "A" + Y).getBytes();
-        buf = (x +"A"+ y).getBytes();
+        buf = (x +"A"+ y+"B"+X+"C"+Y).getBytes();
         textView2.setText(Arrays.toString(buf));
-        textView5.setText(Arrays.toString(buf1));
         a.run();
-        b.run();
 
     }
 
@@ -265,15 +260,10 @@ public class MainActivity extends AppCompatActivity {
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
-        Client b = new Client();
         buf = null;
-        buf1 = null;
-        buf1 = (X + "A" + Y).getBytes();
-        buf = (x +"A"+ y).getBytes();
+        buf = (x +"A"+ y+"B"+X+"C"+Y).getBytes();
         textView2.setText(Arrays.toString(buf));
-        textView5.setText(Arrays.toString(buf1));
         a.run();
-        b.run();
 
 
     }
@@ -289,16 +279,10 @@ public class MainActivity extends AppCompatActivity {
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
-        Client b = new Client();
         buf = null;
-        buf1 = null;
-        buf1 = (X + "A" + Y).getBytes();
-        buf = (x +"A"+ y).getBytes();
+        buf = (x +"A"+ y+"B"+X+"C"+Y).getBytes();
         textView2.setText(Arrays.toString(buf));
-        textView5.setText(Arrays.toString(buf1));
         a.run();
-        b.run();
-
     }
 
     void backwardright() {
@@ -312,16 +296,10 @@ public class MainActivity extends AppCompatActivity {
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
-        Client b = new Client();
         buf = null;
-        buf1 = null;
-        buf1 = (X + "A" + Y).getBytes();
-        buf = (x +"A"+ y).getBytes();
+        buf = (x +"A"+ y+"B"+X+"C"+Y).getBytes();
         textView2.setText(Arrays.toString(buf));
-        textView5.setText(Arrays.toString(buf1));
         a.run();
-        b.run();
-
 
     }
 
@@ -336,15 +314,10 @@ public class MainActivity extends AppCompatActivity {
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
-        Client b = new Client();
         buf = null;
-        buf1 = null;
-        buf1 = (X + "A" + Y).getBytes();
-        buf = (x +"A"+ y).getBytes();
+        buf = (x +"A"+ y+"B"+X+"C"+Y).getBytes();
         textView2.setText(Arrays.toString(buf));
-        textView5.setText(Arrays.toString(buf1));
         a.run();
-        b.run();
     }
 
     void left() {
@@ -358,16 +331,10 @@ public class MainActivity extends AppCompatActivity {
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
-        Client b = new Client();
         buf = null;
-        buf1 = null;
-        buf1 = (X + "A" + Y).getBytes();
-        buf = (x +"A"+ y).getBytes();
+        buf = (x +"A"+ y+"B"+X+"C"+Y).getBytes();
         textView2.setText(Arrays.toString(buf));
-        textView5.setText(Arrays.toString(buf1));
         a.run();
-        b.run();
-
 
     }
 
@@ -382,16 +349,10 @@ public class MainActivity extends AppCompatActivity {
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
-        Client b = new Client();
         buf = null;
-        buf1 = null;
-        buf = (X + "A" + Y).getBytes();
-        buf = (x +"A"+ y).getBytes();
+        buf = (x +"A"+ y+"B"+X+"C"+Y).getBytes();
         textView2.setText(Arrays.toString(buf));
-        textView5.setText(Arrays.toString(buf));
         a.run();
-        b.run();
-
 
     }
 
@@ -406,15 +367,10 @@ public class MainActivity extends AppCompatActivity {
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
-        Client b = new Client();
         buf = null;
-        buf1 = null;
-        buf1 = (X + "A" + Y).getBytes();
-        buf = (x +"A"+ y).getBytes();
+        buf = (x +"A"+ y+"B"+X+"C"+Y).getBytes();
         textView2.setText(Arrays.toString(buf));
-        textView5.setText(Arrays.toString(buf1));
         a.run();
-        b.run();
     }
 
     void backwardleft() {
@@ -428,15 +384,10 @@ public class MainActivity extends AppCompatActivity {
         textView3.setText(x);
         textView1.setText(y);
         Client a = new Client();
-        Client b = new Client();
         buf = null;
-        buf1 = null;
-        buf1 = (X + "A" + Y).getBytes();
-        buf = (x +"A"+ y).getBytes();
+        buf = (x +"A"+ y+"B"+X+"C"+Y).getBytes();
         textView2.setText(Arrays.toString(buf));
-        textView5.setText(Arrays.toString(buf1));
         a.run();
-        b.run();
     }
 
     // when LED 1 BUTTON is pressed
@@ -572,5 +523,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
+
     }
 }
